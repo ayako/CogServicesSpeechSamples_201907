@@ -27,7 +27,7 @@ namespace TextToSpeechApp_201907
 
         private async void SpeakButton_Clicked(object sender, RoutedEventArgs e)
         {
-            var config = SpeechConfig.FromSubscription("YOUR_API_KEY", "YOUR_REGION");
+            var config = SpeechConfig.FromSubscription("YOUR_API_KEY", "YOUR_LOCATION");
             config.SpeechSynthesisLanguage = "ja-JP";
             try
             {
