@@ -11,6 +11,8 @@
 - Speech-to-Text (C#([UWP](#cuwp)) | [HTML/JavaScript](#htmljavascript))
 - Text-to-Speech (C#([Console](#cconsole) | [UWP](#cuwp-1)))
 
+Speech Service のサブスクリプション申込を行い、ロケーション(場所、Region)と API キー (Key1) を取得しておきます。
+![](SpeechServiceSubscription.png)
 
 ## Speech-to-Text
 
