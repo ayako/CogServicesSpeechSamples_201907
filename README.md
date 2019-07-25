@@ -9,7 +9,7 @@
 # サンプルの利用方法
 
 - Speech-to-Text (C#([UWP](#cuwp)) | [HTML/JavaScript](#htmljavascript))
-- Text-to-Speech (C#([Console](#cconsole) | [UWP](#cuwp-1)))
+- Text-to-Speech (C#([Console](#cconsole) | [UWP](#cuwp-1)) | [Node.js]())
 
 Speech Service のサブスクリプション申込を行い、ロケーション(場所、Region)と API キー (Key1) を取得しておきます。
 ![](SpeechServiceSubscription.png)
@@ -49,4 +49,12 @@ public static async Task SynthesisToSpeakerAsync()
 private async void SpeakButton_Clicked(object sender, RoutedEventArgs e)
 {
     var config = SpeechConfig.FromSubscription("YOUR_API_KEY", "YOUR_LOCATION");
+```
+
+### Node.js
+[TTS.js](samples/TextToSpeech/NodeJS/TTS.js) にある YOUR_API_KEY と YOUR_LOCATION にご自分のサブスクリプションの情報(APIキー、サービスを作成したロケーション(westus, japaneast など))を入力します。
+
+```
+const location = "YOUR_LOCATION";
+const apiKey = "YOUR_API_KEY";
 ```
