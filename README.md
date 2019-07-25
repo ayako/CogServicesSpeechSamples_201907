@@ -8,8 +8,8 @@
 
 # サンプルの利用方法
 
-- Speech-to-Text (C#(UWP) | HTML/JavaScript)
-- Text-to-Speech (C#(Console | UWP))
+- Speech-to-Text (C#([UWP](#cuwp)) | [HTML/JavaScript](#htmljavascript))
+- Text-to-Speech (C#([Console](#cconsole) | [UWP](#cuwp-1)))
 
 
 ## Speech-to-Text
