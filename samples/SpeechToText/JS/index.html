@@ -1,0 +1,99 @@
+<html>
+<head>
+   <title>Speech SDK JavaScript Quickstart</title>
+</head>
+<body>
+
+<!-- UI code -->
+<div id="content" style="display:none">
+  <table width="100%">
+    <tr>
+      <td></td>
+      <td><h1 style="font-weight:500;">Microsoft Cognitive Services Speech SDK JavaScript Quickstart</h1></td>
+    </tr>
+    <tr>
+      <td align="right">Subscription Key</td>
+      <td><input id="subscriptionKey" type="text" size="40" value=""></td>
+    </tr>
+    <tr>
+      <td align="right">Region</td>
+      <td><input id="serviceRegion" type="text" size="40" value=""></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button id="recognizeButton">Start recognition</button></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">Results</td>
+      <td><textarea id="phraseDiv" style="display: inline-block;width:500px;height:200px"></textarea></td>
+    </tr>
+  </table>
+</div>
+
+<!-- Main code -->
+<script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
+
+<script>
+  // status fields and start button in UI
+  var phraseDiv;
+  var recognizeButton;
+
+  // subscription key and region for speech services.
+  var subscriptionKey, serviceRegion;
+  var authorizationToken;
+  var SpeechSDK;
+  var recognizer;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    recognizeButton = document.getElementById("recognizeButton");
+    subscriptionKey = document.getElementById("subscriptionKey");
+    serviceRegion = document.getElementById("serviceRegion");
+    phraseDiv = document.getElementById("phraseDiv");
+
+    recognizeButton.addEventListener("click", function () {
+      recognizeButton.disabled = true;
+      phraseDiv.innerHTML = "";
+
+      // if we got an authorization token, use the token. Otherwise use the provided subscription key
+      var speechConfig;
+      if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
+          alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
+          return;
+      } else {
+        speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value);
+      }
+
+      speechConfig.speechRecognitionLanguage = "ja-jp";
+      var audioConfig  = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
+      recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+
+      recognizer.recognizeOnceAsync(
+        function (result) {
+          recognizeButton.disabled = false;
+          phraseDiv.innerHTML += result.text;
+          window.console.log(result);
+
+          recognizer.close();
+          recognizer = undefined;
+        },
+        function (err) {
+          recognizeButton.disabled = false;
+          phraseDiv.innerHTML += err;
+          window.console.log(err);
+
+          recognizer.close();
+          recognizer = undefined;
+        });
+    });
+
+    if (!!window.SpeechSDK) {
+      SpeechSDK = window.SpeechSDK;
+      recognizeButton.disabled = false;
+
+      document.getElementById('content').style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>
