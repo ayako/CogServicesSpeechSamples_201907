@@ -58,3 +58,21 @@ private async void SpeakButton_Clicked(object sender, RoutedEventArgs e)
 const location = "YOUR_LOCATION";
 const apiKey = "YOUR_API_KEY";
 ```
+
+出力したい言語を変更するには　function textToSpeech の以下の箇所をを以下のように変更します;
+
+```
+function textToSpeech(accessToken, text) {
+    // Create the SSML request.
+    let xml_body = xmlbuilder.create('speak')
+        .att('version', '1.0')
+        .att('xml:lang', 'en-us')
+        .ele('voice')
+        .att('xml:lang', 'en-us')
+        .att('name', 'Microsoft Server Speech Text to Speech Voice (en-US, Guy24KRUS)')
+```
+
+- 英語(初期設定): Microsoft Server Speech Text to Speech Voice (en-US, Guy24KRUS)
+- 日本語: Microsoft Server Speech Text to Speech Voice (ja-JP, HarukaRUS)
+
+対応言語については、[Speech Service のドキュメント](https://docs.microsoft.com/ja-jp/azure/cognitive-services/speech-service/language-support) をご確認ください。
