@@ -23,6 +23,8 @@ There are 2 functions;
 
 Simple web app to post wav files to blob storage, and get transcription json files.
 
+![](BatchTranscriptionWeb_20200214.png)
+
 
 ## Requrements
 
