@@ -1,0 +1,51 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Speech-to-Text Batch Sample";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Speech-to-Text Batch Sample</h1>
+
+        <h3>新規アップロード</h3>
+
+        <form method="post" asp-action="Upload" enctype="multipart/form-data">
+            <input type="file" asp-for="WavFile" />
+            <input type="submit" />
+        </form>
+
+        <hr width="80%" />
+
+        <h3>一覧</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>username</th>
+                    <th>operation id</th>
+                    <th>wav file</th>
+                    <th>txt file</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SttEntityList)
+                {
+                    <tr>
+                        <td>@item.PartitionKey</td>
+                        <td>@item.RowKey</td>
+                        <td><a href="@item.WavFileUrl">@item.WavFileName</a></td>
+                        <td>
+                            @if (item.TxtFileUrl != null)
+                            {
+                                <a href="@item.TxtFileUrl">@item.TxtFileName</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
