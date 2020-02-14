@@ -1,7 +1,7 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "YOUR_WEBJOB_STORAGE_CONNECTION_STRING",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "BlobStorage": "YOUR_APP_STORAGE_CONNECTION_STRING",
     "TableStorage": "YOUR_APP_STORAGE_CONNECTION_STRING",

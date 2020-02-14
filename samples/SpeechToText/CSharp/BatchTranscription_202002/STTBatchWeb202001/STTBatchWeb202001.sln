@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STTBatchWeb202001", "STTBatchWeb202001\STTBatchWeb202001.csproj", "{4A96E417-D13C-41B8-8799-AA454C4B80E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STTBatchWeb202001", "STTBatchWeb202001.csproj", "{4A96E417-D13C-41B8-8799-AA454C4B80E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
