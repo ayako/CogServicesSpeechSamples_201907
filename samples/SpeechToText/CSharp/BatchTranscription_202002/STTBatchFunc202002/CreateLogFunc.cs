@@ -9,38 +9,37 @@ using Microsoft.Extensions.Logging;
 
 namespace STTBatchFunc202002
 {
-    public static class UpdateLogFunc
+    public static class CreateLogFunc
     {
-        [FunctionName("UpdateLogFunc")]
+        [FunctionName("CreateLogFunc")]
         public static async Task Run(
-            [BlobTrigger("txt/{name}", Connection = "BlobStorage")] CloudBlockBlob blob, string name,
+            [BlobTrigger("wav/{name}", Connection = "BlobStorage")] CloudBlockBlob blob, string name,
             [Table("log", Connection = "TableStorage")] CloudTable table,
             ILogger log)
         {
-            await UpdateTableItemAsync(table, blob, name);
+            await CreateTableItemAsync(table, blob, name);
 
-            log.LogInformation($"C# Blob trigger function (UpdateLogFunc)\nProcessed Blob Name:{name}");
+            log.LogInformation($"C# Blob trigger function (CreateLogFunc)\nProcessed Blob Name:{name}");
         }
 
-        private static async Task UpdateTableItemAsync(CloudTable table, CloudBlockBlob blob, string txtFileName)
+        private static async Task CreateTableItemAsync(CloudTable table, CloudBlockBlob blob, string wavFileName)
         {
-            var txtFileUrl = blob.Container.GetBlockBlobReference(txtFileName).Uri.AbsoluteUri.ToString();
+            var wavFileUrl = blob.Container.GetBlockBlobReference(wavFileName).Uri.AbsoluteUri.ToString();
 
-            var wavFileName = txtFileName.Replace(".json", ".wav");
             var query = new TableQuery<STTEntity>();
             var result = await table.ExecuteQuerySegmentedAsync<STTEntity>(query, null);
             var entity = result.ToList<STTEntity>().Find(x => x.WavFileName == wavFileName);
 
-            if (entity != null)
+            if (entity == null)
             {
                 var newEntity = new STTEntity()
                 {
-                    PartitionKey = entity.PartitionKey,
-                    RowKey = entity.RowKey,
-                    WavFileName = entity.WavFileName,
-                    WavFileUrl = entity.WavFileUrl,
-                    TxtFileName = txtFileName,
-                    TxtFileUrl = txtFileUrl,
+                    PartitionKey = "direct_upload",
+                    RowKey = "direct_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"),
+                    WavFileName = wavFileName,
+                    WavFileUrl = wavFileUrl,
+                    //TxtFileName = null,
+                    //TxtFileUrl = null,
                 };
 
                 await table.ExecuteAsync(TableOperation.InsertOrMerge(newEntity));

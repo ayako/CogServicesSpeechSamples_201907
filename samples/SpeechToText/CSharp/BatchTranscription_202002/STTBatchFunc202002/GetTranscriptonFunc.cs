@@ -75,7 +75,7 @@ namespace STTBatchFunc202002
                     log.LogInformation($"HttpRequest Error: Failed to delete transcription");
                 }
 
-                log.LogInformation($"C# Blob trigger function (wavBlob) Processed blob\n Name: wav/{wavFileName} \n Size: {wavBlob.Properties.Length} Bytes");
+                log.LogInformation($"C# Blob trigger function (GetTranscriptionFunc)\nProcessed Blob Name: wav/{wavFileName}, Size: {wavBlob.Properties.Length} Bytes");
 
             }
             else

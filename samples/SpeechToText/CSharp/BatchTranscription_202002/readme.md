@@ -5,7 +5,12 @@
 
 ### Speech-to-text by batch using Azure Functions (.NET Core 3.0) (STTBatchFunc)
 
-There are 2 functions;
+There are 3 functions;
+
+#### CreateLogFunc.cs
+
+- Kicked by BlobTrigger.
+- Create "log" Table to log files and transcript result.
 
 #### GetTranscriptionFunc.cs
 
